@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { FeedbackItem } from '@/lib/cosmos';
 import FeedbackCard from './FeedbackCard';
-import { Wifi, WifiOff, RefreshCw, MessageCircle, Search, Filter, X } from 'lucide-react';
+import { Wifi, WifiOff, RefreshCw, MessageCircle, Search, Filter, X, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 // Add filter interface
 interface FeedbackFilters {
@@ -15,6 +16,7 @@ interface FeedbackFilters {
 }
 
 export default function FeedbackStream() {
+  const { logout } = useAuth();
   const [feedbackItems, setFeedbackItems] = useState<FeedbackItem[]>([]);
   const [filteredItems, setFilteredItems] = useState<FeedbackItem[]>([]);
   const [isConnected, setIsConnected] = useState(false);
@@ -211,7 +213,14 @@ export default function FeedbackStream() {
               </h2>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={logout}
+              className="flex items-center space-x-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
             {isConnected ? (
               <div className="flex items-center space-x-1 text-green-600">
                 <Wifi className="w-4 h-4" />
