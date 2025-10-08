@@ -18,8 +18,6 @@ let cosmosClient: CosmosClient | null = null;
 
 export function getCosmosClient(): CosmosClient {
   if (!cosmosClient) {
-    const endpoint = process.env.COSMOS_DB_ENDPOINT;
-    const key = process.env.COSMOS_DB_KEY;
     const connectionString = process.env.COSMOS_DB_CONNECTION_STRING;
 
     if (!connectionString) {
