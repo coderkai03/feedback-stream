@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FeedbackItem } from '@/lib/cosmos';
 import FeedbackCard from './FeedbackCard';
-import { Wifi, WifiOff, RefreshCw } from 'lucide-react';
+import { Wifi, WifiOff, RefreshCw, MessageCircle } from 'lucide-react';
 
 export default function FeedbackStream() {
   const [feedbackItems, setFeedbackItems] = useState<FeedbackItem[]>([]);
@@ -132,9 +132,14 @@ export default function FeedbackStream() {
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Live Feedback Stream
-          </h1>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              [a] assistant 2.0 BETA
+            </h1>
+            <h2 className="text-lg font-medium text-gray-600 dark:text-gray-400">
+              Live Feedback Stream
+            </h2>
+          </div>
           <div className="flex items-center space-x-2">
             {isConnected ? (
               <div className="flex items-center space-x-1 text-green-600">
