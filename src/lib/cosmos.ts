@@ -19,11 +19,17 @@ let cosmosClient: CosmosClient | null = null;
 export function getCosmosClient(): CosmosClient {
   if (!cosmosClient) {
     const connectionString = process.env.COSMOS_DB_CONNECTION_STRING;
+    const endpoint = process.env.COSMOS_DB_ENDPOINT;
+    const key = process.env.COSMOS_DB_KEY;
 
-    if (!connectionString) {
-      throw new Error('Cosmos DB configuration is missing. Please set either COSMOS_DB_ENDPOINT and COSMOS_DB_KEY, or COSMOS_DB_CONNECTION_STRING');
+    if (!endpoint || !key) {
+      if (!connectionString) {
+        throw new Error('Cosmos DB configuration is missing. Please set either COSMOS_DB_ENDPOINT and COSMOS_DB_KEY, or COSMOS_DB_CONNECTION_STRING');
+      }
+      cosmosClient = new CosmosClient(connectionString);
+    } else {
+      cosmosClient = new CosmosClient({ endpoint, key });
     }
-    cosmosClient = new CosmosClient(connectionString);
   }
 
   return cosmosClient;
